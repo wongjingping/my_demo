@@ -1,0 +1,22 @@
+{
+  "name": "sscda_demo",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "JP"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "angular-bootstrap": "^1.3.3"
+  }
+}

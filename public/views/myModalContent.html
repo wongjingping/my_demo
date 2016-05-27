@@ -1,0 +1,68 @@
+<div class="modal-header">
+	<h3 class="modal-title">I'm a modal!</h3>
+</div>
+<div class="modal-body">
+	<table class="table">
+		<tbody>
+			<tr>
+				<td>Use Case</td>
+				<td><input class="form-control" ng-model="newdemo['UseCase']"></td>
+			</tr>
+			<tr>
+				<td>Vertical</td>
+				<td>
+					<select class="form-control" ng-model="newdemo['Vertical']" ng-options="v for v in verticals"></select>
+				</td>
+			</tr>
+			<tr>
+				<td>Technology</td>
+				<td><input class="form-control" ng-model="newdemo['Technology']"></td>
+			</tr>
+			<tr>
+				<td>Creator</td>
+				<td><input class="form-control" ng-model="newdemo['Creator']"></td>
+			</tr>
+			<tr>
+				<td>Type of Analytics</td>
+				<td>
+					<div class="bootstrap-tagsinput" ng-model="newdemo['AnalyticTechniques']">
+						<input type="text">
+							<!-- <input class="form-control" ng-model="newdemo['AnalyticTechniques']"> -->
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>Data Source</td>
+				<td><input class="form-control" ng-model="newdemo['DataSource']"></td>
+			</tr>
+			<tr>
+				<td>Last Updated</td>
+				<td class='input-group'>
+					<input class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="newdemo['LastUpdated']" is-open="popupDate.opened" datepicker-options="dateOptions" ng-required="true" alt-input-formats="altInputFormats" />
+					<span class="input-group-btn">
+						<button type="button" class="btn" ng-click="openDate()">
+							<i class="glyphicon glyphicon-calendar"></i>
+						</button>
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td>Location</td>
+				<td><input class="form-control" ng-model="newdemo['Location']"></td>
+			</tr>
+			<tr>
+				<td>Description</td>
+				<td><input class="form-control" ng-model="newdemo['Description']"></td>
+			</tr>
+			<tr>
+				<td>Tags</td>
+				<td><input class="form-control" ng-model="newdemo['Tags']" data-role="tagsinput"></td>
+			</tr>
+		</tbody>
+
+	</table>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary" ng-click="addDemo(newdemo)">Add</button>
+	<button class="btn" ng-click="cancel()">Cancel</button>
+</div>
