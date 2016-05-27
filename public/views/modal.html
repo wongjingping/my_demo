@@ -1,5 +1,5 @@
 <div class="modal-header">
-	<h3 class="modal-title">I'm a modal!</h3>
+	<h3 class="modal-title">Add Demo</h3>
 </div>
 <div class="modal-body">
 	<table class="table">
@@ -16,7 +16,11 @@
 			</tr>
 			<tr>
 				<td>Technology</td>
-				<td><input class="form-control" ng-model="newdemo['Technology']"></td>
+				<td>
+					<tags-input ng-model="newdemo['Technology']" min-length="1" replace-spaces-with-dashes="false" placeholder="">
+						<auto-complete source="technology" min-length="0" max-results-to-show="{{technology.length}}" select-first-match="false" ></auto-complete>
+					</tags-input>
+				</td>
 			</tr>
 			<tr>
 				<td>Creator</td>
@@ -25,10 +29,9 @@
 			<tr>
 				<td>Type of Analytics</td>
 				<td>
-					<div class="bootstrap-tagsinput" ng-model="newdemo['AnalyticTechniques']">
-						<input type="text">
-							<!-- <input class="form-control" ng-model="newdemo['AnalyticTechniques']"> -->
-					</div>
+					<tags-input ng-model="newdemo['AnalyticTechniques']" min-length="1" replace-spaces-with-dashes="false" placeholder="">
+						<auto-complete source="techniques" min-length="0" max-results-to-show="{{techniques.length}}" select-first-match="false"></auto-complete>
+					</tags-input>
 				</td>
 			</tr>
 			<tr>

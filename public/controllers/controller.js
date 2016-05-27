@@ -1,6 +1,6 @@
 
 
-var demoMod = angular.module('demoApp', ['ui.bootstrap']);
+var demoMod = angular.module('demoApp', ['ui.bootstrap','ngTagsInput']);
 
 demoMod.controller('demoCtrl', ['$scope','$http','$uibModal',
 	function($scope, $http, $uibModal){
@@ -8,25 +8,12 @@ demoMod.controller('demoCtrl', ['$scope','$http','$uibModal',
 		// static values
 		$scope.verticals = ['Commercial','Education','General','Government',
 			'Healthcare','Public Safety','Transport','Various'];
-		// pop-up settings
-		$scope.popupDate = {
-			opened: false
-		};
-		$scope.openDate = function() {
-			$scope.popupDate.opened = true
-		};
-		$scope.dateOptions = {
-			formatYear: 'yy',
-			maxDate: new Date(),
-			minDate: new Date(2015, 1, 1),
-			startingDay: 1
-			};
-		$scope.altInputFormats = ['M!/d!/yyyy'];
+
 
 		$http.defaults.headers.post["Content-Type"] = "application/json";
 
 		// capitalizes first letter
-		function toTitleCase(str){
+		var toTitleCase = function(str){
 			return str.replace(/\w\S*/g, 
 				function(txt){
 					return txt.charAt(0).toUpperCase() + txt.substr(1);
@@ -34,21 +21,29 @@ demoMod.controller('demoCtrl', ['$scope','$http','$uibModal',
 		};
 
 		// format date before sending to server
-		function formatDate(dt){
+		var formatDate = function(dt){
 			return dt.toISOString().slice(0, 10);
+		};
+
+		// convert tag inputs into an array
+		var tagInput2Array = function(tagInput){
+			for (var i = 0; i < tagInput.length; i++) {
+				tagInput[i] = toTitleCase(tagInput[i]['text']);
+			};
+			return tagInput;
 		};
 
 
 		// data refresh
 		var refresh = function(){
-			$http.get('/demolist').success(function(response){
-				console.log('controller rcv data with ' + 
-					response.length + ' items');
+			$http.get('/demolist').success(function(res){
+				console.log('refresh: controller rcv data with ' + 
+					res.length + ' items');
+				$scope.demos = res;
+				$scope.newdemo = null;
 				// hackish way to prevent modal hanging page :|
 				$(".modal-backdrop").remove();
 				$("body").attr("class","modal-close");
-				$scope.demos = response;
-				$scope.newdemo = null;
 			});
 		};
 
@@ -62,20 +57,26 @@ demoMod.controller('demoCtrl', ['$scope','$http','$uibModal',
 			}
 			
 			// check for array fields
-			// if (!demo['AnalyticTechniques'] === Array) {
-			// 	console.log('Type of Analytics is not an Array!');
-			// };
-			// if (!demo['Technology'] === Array) {
-			// 	console.log('Technology is not an Array!');
-			// };
+			if(!demo.hasOwnProperty('AnalyticTechniques')){
+				demo['AnalyticTechniques'] = [];
+			} else if (!demo['AnalyticTechniques'] === Array) {
+				console.log('Type of Analytics is not an Array!');
+			} else {
+				demo['AnalyticTechniques'] = tagInput2Array(demo['AnalyticTechniques']);
+			};
+			if(!demo.hasOwnProperty('Technology')){
+				demo['Technology'] = [];
+			} else if (!demo['Technology'] === Array) {
+				console.log('Technology is not an Array!');
+			} else {
+				demo['Technology'] = tagInput2Array(demo['Technology']);
+			};
 			return demo;
 		};
 
 		$scope.addDemo = function(newdemo){
 			console.log('adding');
-			console.log(newdemo);
 			newdemo = cleanDemo(newdemo);
-			console.log(newdemo);
 			$http.post('/demolist', newdemo).success(function(res){
 				console.log('rcv from db:');
 				console.log(res);
@@ -116,7 +117,7 @@ demoMod.controller('demoCtrl', ['$scope','$http','$uibModal',
 		$scope.openModal = function(){
 			var modalInstance = $uibModal.open({
 				animation: true,
-				templateUrl: 'views/myModalContent.html',
+				templateUrl: 'views/modal.html',
 				controller: 'modalCtrl',
 				resolve: {
 					verticals: function(){
@@ -125,13 +126,15 @@ demoMod.controller('demoCtrl', ['$scope','$http','$uibModal',
 				}
 			});
 
+			// refresh data whenever the modal is closed
 			modalInstance.closed.then(function(data){
-				console.log('closed modal');
+				refresh();
 			});
 
-			modalInstance.result.then(function(data){
-				console.log('closed modal with data');
-				$scope.addDemo(data);
+			// add newdemo upon closing the modal and receiving the object
+			modalInstance.result.then(function(newdemo){
+				console.log('closed modal with newdemo');
+				$scope.addDemo(newdemo);
 			});
 		};
 
@@ -142,15 +145,42 @@ demoMod.controller('demoCtrl', ['$scope','$http','$uibModal',
 }]);
 
 
+// controller for modal
 demoMod.controller('modalCtrl', 
 	function($scope, $http, $uibModalInstance, verticals){
 
+	// static values
 	$scope.verticals = verticals;
+	// tags-input options
+	$scope.technology = ["R","Python","Shiny","Tableau","TIBCO Spotfire",
+	"Qlikview","SAS Visual Analytics","SAS Enterprise Miner",
+	"Microstrategy","Gephi","Java","Matlab"]
+	$scope.techniques = ["Predictive Analytics","Text Analytics",
+	"Forecasting","Social Media Analytics","Optimization","Simulation",
+	"CEP","Clustering","Association Rules Mining","Network Analytics"];
 
+
+	// datepicker pop-up settings
+	$scope.popupDate = {
+		opened: false
+	};
+	$scope.openDate = function() {
+		$scope.popupDate.opened = true
+	};
+	$scope.dateOptions = {
+		formatYear: 'yy',
+		maxDate: new Date(),
+		minDate: new Date(2015, 1, 1),
+		startingDay: 1
+		};
+	$scope.altInputFormats = ['M!/d!/yyyy'];
+
+	// close the modal and return newdemo object
 	$scope.addDemo = function(newdemo){
 		$uibModalInstance.close(newdemo);
 	};
 
+	// dismiss the modal without result
 	$scope.cancel = function(){
 		$uibModalInstance.dismiss('cancel');
 	};

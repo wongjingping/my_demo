@@ -7,8 +7,10 @@
 	<!-- favicon -->
 	<link rel="icon" href="/public/static/imgs/favicon.png" type="image/png">
 
-	<!-- CSS from Bootstrap -->
+	<!-- CSS from Bootstrap, AngularUI -->
 	<link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/bower_components/ng-tags-input/ng-tags-input.css">
+	<link rel="stylesheet" type="text/css" href="/bower_components/ng-tags-input/ng-tags-input.bootstrap.css">
 
 	<!-- My Extra CSS styles -->
 	<link rel="stylesheet" type="text/css" href="/public/static/styles/css/demos.css">
@@ -23,94 +25,7 @@
 	<div class="container" ng-controller="demoCtrl">
 
 
-		<button type="button" class="btn" ng-click="openModal()">New Demo</button>
-
-		<div class="container">
-			<!-- Trigger the modal with a button -->
-			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal" align="center">Add Demo</button>
-
-			<!-- Modal Start -->
-			<div class="modal fade in" id="addModal" role="dialog">
-				<div class="modal-dialog">
-
-					<!-- Modal content-->					
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h3 class="modal-title">Add Example</h3>
-						</div>
-						<div class="modal-body">
-							<table class="table">
-								<tbody>
-									<tr>
-										<td>Use Case</td>
-										<td><input class="form-control" ng-model="newdemo['UseCase']"></td>
-									</tr>
-									<tr>
-										<td>Vertical</td>
-										<td>
-											<select class="form-control" ng-model="newdemo['Vertical']" ng-options="v for v in verticals"></select>
-										</td>
-									</tr>
-									<tr>
-										<td>Technology</td>
-										<td><input class="form-control" ng-model="newdemo['Technology']"></td>
-									</tr>
-									<tr>
-										<td>Creator</td>
-										<td><input class="form-control" ng-model="newdemo['Creator']"></td>
-									</tr>
-									<tr>
-										<td>Type of Analytics</td>
-										<td>
-											<div class="bootstrap-tagsinput" ng-model="newdemo['AnalyticTechniques']">
-												<input type="text">
-													<!-- <input class="form-control" ng-model="newdemo['AnalyticTechniques']"> -->
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>Data Source</td>
-										<td><input class="form-control" ng-model="newdemo['DataSource']"></td>
-									</tr>
-									<tr>
-										<td>Last Updated</td>
-										<td class='input-group'>
-											<input class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="newdemo['LastUpdated']" is-open="popupDate.opened" datepicker-options="dateOptions" ng-required="true" alt-input-formats="altInputFormats" />
-											<span class="input-group-btn">
-												<button type="button" class="btn" ng-click="openDate()">
-													<i class="glyphicon glyphicon-calendar"></i>
-												</button>
-											</span>
-										</td>
-									</tr>
-									<tr>
-										<td>Location</td>
-										<td><input class="form-control" ng-model="newdemo['Location']"></td>
-									</tr>
-									<tr>
-										<td>Description</td>
-										<td><input class="form-control" ng-model="newdemo['Description']"></td>
-									</tr>
-									<tr>
-										<td>Tags</td>
-										<td><input class="form-control" ng-model="newdemo['Tags']" data-role="tagsinput"></td>
-									</tr>
-								</tbody>
-
-							</table>
-						</div>
-						<div class="modal-footer">
-							<button class="btn btn-primary" data-dismiss="modal" ng-click="addDemo(newdemo)">Add</button>
-							<button class="btn" data-dismiss="modal">Cancel</button>
-						</div>
-						
-					</div>
-				</div>
-			</div>
-			<!-- Modal End -->
-
-		</div>
+		<button type="button" class="btn btn-success" ng-click="openModal()">New Demo</button>
 
 		<!-- Search Bar Start -->
 		<div class="container">
@@ -249,6 +164,7 @@
 	<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
 	<script type="text/javascript" src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+	<script type="text/javascript" src="/bower_components/ng-tags-input/ng-tags-input.min.js"></script>
 	
 	<!-- custom plugins and controllers -->
 	<script type="text/javascript" src="controllers/controller.js"></script>
