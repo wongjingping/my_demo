@@ -64,7 +64,10 @@ demoMod.controller('demoCtrl', ['$scope','$http','$uibModal',
 				demo['Creator'] = toTitleCase(demo['Creator']);	
 			};
 			if(demo['LastUpdated'] != null) {
+				debugger;
 				demo['LastUpdated'] = formatDate(demo['LastUpdated']);
+			} else {
+				demo['LastUpdated'] = '';
 			};
 			
 			// check for array fields
@@ -88,8 +91,10 @@ demoMod.controller('demoCtrl', ['$scope','$http','$uibModal',
 		// convert JSON data from mongoDB into field types
 		var toModalFields = function(demo){
 			// convert to date
-			if(demo.hasOwnProperty('LastUpdated')) {
+			if(demo.hasOwnProperty('LastUpdated') && demo['LastUpdated'] != '') {
 				demo['LastUpdated'] = new Date(demo['LastUpdated']);
+			} else {
+				demo['LastUpdated'] = null;
 			};
 			// check for array fields
 			if(!demo.hasOwnProperty('AnalyticTechniques')){
