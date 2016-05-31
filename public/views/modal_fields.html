@@ -1,47 +1,47 @@
 <div class="modal-header">
-	<h3 class="modal-title">Add Demo</h3>
+	<h3 class="modal-title">{{operation}} Demo</h3>
 </div>
 <div class="modal-body">
 	<table class="table">
 		<tbody>
 			<tr>
 				<td>Use Case</td>
-				<td><input class="form-control" ng-model="newdemo['UseCase']"></td>
+				<td><input class="form-control" ng-model="demo['UseCase']"></td>
 			</tr>
 			<tr>
 				<td>Vertical</td>
 				<td>
-					<select class="form-control" ng-model="newdemo['Vertical']" ng-options="v for v in verticals"></select>
+					<select class="form-control" ng-model="demo['Vertical']" ng-options="v for v in verticals"></select>
 				</td>
 			</tr>
 			<tr>
 				<td>Technology</td>
 				<td>
-					<tags-input ng-model="newdemo['Technology']" min-length="1" replace-spaces-with-dashes="false" placeholder="">
+					<tags-input ng-model="demo['Technology']" min-length="1" replace-spaces-with-dashes="false" placeholder="">
 						<auto-complete source="technology" min-length="0" max-results-to-show="{{technology.length}}" select-first-match="false" ></auto-complete>
 					</tags-input>
 				</td>
 			</tr>
 			<tr>
 				<td>Creator</td>
-				<td><input class="form-control" ng-model="newdemo['Creator']"></td>
+				<td><input class="form-control" ng-model="demo['Creator']"></td>
 			</tr>
 			<tr>
 				<td>Type of Analytics</td>
 				<td>
-					<tags-input ng-model="newdemo['AnalyticTechniques']" min-length="1" replace-spaces-with-dashes="false" placeholder="">
+					<tags-input ng-model="demo['AnalyticTechniques']" min-length="1" replace-spaces-with-dashes="false" placeholder="">
 						<auto-complete source="techniques" min-length="0" max-results-to-show="{{techniques.length}}" select-first-match="false"></auto-complete>
 					</tags-input>
 				</td>
 			</tr>
 			<tr>
 				<td>Data Source</td>
-				<td><input class="form-control" ng-model="newdemo['DataSource']"></td>
+				<td><input class="form-control" ng-model="demo['DataSource']"></td>
 			</tr>
 			<tr>
 				<td>Last Updated</td>
 				<td class='input-group'>
-					<input class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="newdemo['LastUpdated']" is-open="popupDate.opened" datepicker-options="dateOptions" ng-required="true" alt-input-formats="altInputFormats" />
+					<input class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="demo['LastUpdated']" is-open="popupDate.opened" datepicker-options="dateOptions" ng-required="true" alt-input-formats="altInputFormats" />
 					<span class="input-group-btn">
 						<button type="button" class="btn" ng-click="openDate()">
 							<i class="glyphicon glyphicon-calendar"></i>
@@ -51,21 +51,21 @@
 			</tr>
 			<tr>
 				<td>Location</td>
-				<td><input class="form-control" ng-model="newdemo['Location']"></td>
+				<td><input class="form-control" ng-model="demo['Location']"></td>
 			</tr>
 			<tr>
 				<td>Description</td>
-				<td><input class="form-control" ng-model="newdemo['Description']"></td>
+				<td><input class="form-control" ng-model="demo['Description']"></td>
 			</tr>
 			<tr>
 				<td>Tags</td>
-				<td><input class="form-control" ng-model="newdemo['Tags']" data-role="tagsinput"></td>
+				<td><input class="form-control" ng-model="demo['Tags']"></td>
 			</tr>
 		</tbody>
 
 	</table>
 </div>
 <div class="modal-footer">
-	<button class="btn btn-primary" ng-click="addDemo(newdemo)">Add</button>
+	<button class="btn btn-primary" ng-click="returnDemo()">Save</button>
 	<button class="btn" ng-click="cancel()">Cancel</button>
 </div>

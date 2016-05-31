@@ -25,7 +25,7 @@
 	<div class="container" ng-controller="demoCtrl">
 
 
-		<button type="button" class="btn btn-success" ng-click="openModal()">New Demo</button>
+		<button type="button" class="btn btn-success" ng-click="openAddModal()">New Demo</button>
 
 		<!-- Search Bar Start -->
 		<div class="container">
@@ -49,11 +49,9 @@
 							<h4 class="use-case">{{demo['UseCase']}}</h4>
 						</div>
 						<div class="col-xs-2">
-							<img src="static/imgs/delete.png" ng-click="removeDemo(demo)" height="30" width="30" align="right">
+							<img src="static/imgs/delete.png" ng-click="openRemoveModal(demo)" height="30" width="30" align="right">
 							&nbsp;
-							<a data-toggle="modal" data-target="#editModal">
-							<img src="static/imgs/edit.png" height="30" width="30" align="right">
-							</a>
+							<img src="static/imgs/edit.png" ng-click="openEditModal(demo)" height="30" width="30" align="right">
 						</div>
 					</div>
 					<div class="customer">{{demo[['TargetCustomer']]}} 
@@ -78,83 +76,13 @@
 							Location: <a ng-href="{{demo[['Location']]}}">{{demo[['Location']]}}</a>
 							<br>
 						</span>
-						<span ng-if="demo[['card-data']]">
+						<span ng-if="demo[['DataSource']]">
 							Data Source: <span class="card-data">{{demo[['DataSource']]}}</span>
 						</span>
 					</p>
 					<p>{{demo[['Description']]}}</p>
-					
-
-					<!-- modal for editing entry -->
-					<div class="modal fade in" id="editModal" role="dialog">
-						<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-								<h4 class="modal-title">Edit Entry</h4>
-							</div>
-							<div class="modal-body">
-								<table class="table">
-									<tbody>
-										<tr>
-											<td>Use Case</td>
-											<td><input class="form-control" ng-model="demo['UseCase']"></td>
-										</tr>
-										<tr>
-											<td>Vertical</td>
-											<td>
-												<select class="form-control" ng-model="demo['Vertical']" ng-options="v for v in verticals"></select>
-											</td>
-										</tr>
-										<tr>
-											<td>Technology</td>
-											<td><input class="form-control" ng-model="demo['Technology']"></td>
-										</tr>
-										<tr>
-											<td>Creator</td>
-											<td><input class="form-control" ng-model="demo['Creator']"></td>
-										</tr>
-										<tr>
-											<td>Type of Analytics</td>
-											<td>
-												<div class="bootstrap-tagsinput" ng-model="demo['AnalyticTechniques']">
-													<input type="text">
-														<!-- <input class="form-control" ng-model="demo['AnalyticTechniques']"> -->
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>Data Source</td>
-											<td><input class="form-control" ng-model="demo['DataSource']"></td>
-										</tr>
-										<tr>
-											<td>Last Updated</td>
-											<td><input class="form-control" ng-model="demo['LastUpdated']"></td>
-										</tr>
-										<tr>
-											<td>Location</td>
-											<td><input class="form-control" ng-model="demo['Location']"></td>
-										</tr>
-										<tr>
-											<td>Description</td>
-											<td><input class="form-control" ng-model="demo['Description']"></td>
-										</tr>
-										<tr>
-											<td>Tags</td>
-											<td><input class="form-control" ng-model="demo['Tags']" data-role="tagsinput"></td>
-										</tr>
-									</tbody>
-
-								</table>
-							</div>
-							<div class="modal-footer">
-								<button class="btn btn-default" data-dismiss="modal" ng-click='refresh()'>Close</button>
-								<button class="btn btn-primary" data-dismiss="modal" ng-click="editDemo(demo)">Save changes</button>
-							</div>
-						</div><!-- /.modal-content -->
-					</div>
-				</div>
 				</li>
+
 			</ul>
 		</div>
 	</div>
