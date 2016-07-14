@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var mongojs = require('mongojs');
-var db = mongojs('sscda_demo', ['demos']); //db, collection
+var db = mongojs('db_demo', ['c_demo']); //db, collection
 var bodyParser = require('body-parser');
 
 
@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 // get data from db and return as json to controller
 app.get('/demolist', function(req,res){
 	console.log('rcv GET');
-	db.demos.find(function(err,docs){
+	db.c_demo.find(function(err,docs){
 		console.log('rcv data');
 		res.json(docs);
 	})
@@ -26,7 +26,7 @@ app.post('/demolist', function(req,res){
 	for (var i = req.body.length - 1; i >= 0; i--) {
 		console.log(req.body[i]);
 	};
-	db.demos.insert(req.body, function(err,doc){
+	db.c_demo.insert(req.body, function(err,doc){
 		res.json(doc); // return data inserted into db to controller
 	})
 });
@@ -36,7 +36,7 @@ app.put('/demolist/:id', function(req,res){
 	var id = req.params.id;
 	console.log('update POST ID: ' + id);
 	console.log(req.body);
-	db.demos.findAndModify({
+	db.c_demo.findAndModify({
 		query: {_id: mongojs.ObjectId(id)}, 
 		update: {$set: {
 			"Vertical":req.body.Vertical,
@@ -59,7 +59,7 @@ app.put('/demolist/:id', function(req,res){
 app.delete('/demolist/:id', function(req,res){
 	console.log('DELETE ID: ' + id);console.log(id);
 	var id = req.params.id;
-	db.demos.remove({_id: mongojs.ObjectId(id)}, function(err,doc){
+	db.c_demo.remove({_id: mongojs.ObjectId(id)}, function(err,doc){
 		res.json(doc);
 	})
 })

@@ -2,7 +2,7 @@
 <html ng-app="demoApp" lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>SSCDA Demo Records</title>
+	<title>My Demo Records</title>
 
 	<!-- favicon -->
 	<link rel="icon" href="/public/static/imgs/favicon.png" type="image/png">
@@ -13,32 +13,42 @@
 	<link rel="stylesheet" type="text/css" href="/bower_components/ng-tags-input/ng-tags-input.bootstrap.css">
 
 	<!-- My Extra CSS styles -->
-	<link rel="stylesheet" type="text/css" href="/public/static/styles/css/demos.css">
+	<link rel="stylesheet" type="text/css" href="/public/static/css/demos.css">
 
 </head>
 <body>
 
+	<div class="container jumbotron">
+		<h1 class="text-center">
+			<span class="glyphicon glyphicon-th-list"></span>
+			My Demo Records
+		</h1>
+	</div>
+
 	<div class="container">
-		<h1>SSCDA Demo Records</h1>
+		<div class="row">
+			<div class="col-sm-2 col-sm-offset-1">
+				<button type="button" class="btn btn-primary" ng-click="openAddModal()">
+					<span class="glyphicon glyphicon-plus">
+					</span>
+					New Demo
+				</button>
+			</div>
+			<!-- Search Bar Start -->
+			<div class="col-sm-8">
+				<div class="input-group">
+					<input type="text" class="form-control" ng-model="search">
+					<span class="input-group-addon">
+						<span class="glyphicon glyphicon-search"></span>
+					</span>
+				</div>
+			</div>
+			<!-- Search Bar End -->
+		</div>
+		<br>
 	</div>
 
 	<div class="container" ng-controller="demoCtrl">
-
-
-		<button type="button" class="btn btn-success" ng-click="openAddModal()">New Demo</button>
-
-		<!-- Search Bar Start -->
-		<div class="container">
-			<div class="input-group">
-				<span class="input-group-addon">
-					<span class="glyphicon glyphicon-search"></span>
-				</span>
-				<input type="text" class="form-control" ng-model="search">
-			</div>
-		</div>
-		<!-- Search Bar End -->
-		
-		<br>
 
 		<!-- New List Group Design -->
 		<div class="container">

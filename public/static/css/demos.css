@@ -1,0 +1,18 @@
+.use-case {
+	font-weight: 600;
+}
+
+.customer {
+	font-size: 15px;
+	font-weight: 600;
+	text-align: left;
+	color: #666;
+}
+
+.card-text {
+	font-size: 12px;
+}
+
+.card-data {
+	color: #337ab7;
+}
